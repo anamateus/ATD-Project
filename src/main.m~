@@ -31,7 +31,7 @@ function load_data(dir_path)
 	% Arguments :
 	%		>>> dir_path (string): Path to the directory
 	% Return: None
-	% =================================================
+	
 	files = dir(dir_path);
 	k = 1;
 	for file = files(3:end)'
@@ -56,14 +56,14 @@ function plot_data(data,fs,sensors,usr_stances,colors)
 	%		>>> fs (double): Sampling frequency (in Hz) used
 	%		bye the sensors to obtain the values of
 	%		acceleration
-	%		>>> sensors (string): labels that identify each
-	%		component (axis) of the sensor
 	%		>>> usr_stances (string): labels for the plot
 	%		containg the multiple possible stances for a user
 	%		in any given moment
 	%		>>> colors (string): string array with the colors
-	%		for the plot commands	
-	% =================================================
+	%		for the plot commands
+	%		
+	%		
+	%		
 	
 	time = (0:length(data)-1)./(60*fs); 
 	
