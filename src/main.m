@@ -1,6 +1,6 @@
 %% Lots of code!! 
 %% Path to the DataSet directory
-dirpath = "/home/pedro/Documents/Universidade/2ºano/2ºSemestre/ATD/Project/ATD-Project/DataSet";
+dirpath = "../DataSet";
 
 %% Global Variables
 % User stances throughout the study  (labels for the plot)
