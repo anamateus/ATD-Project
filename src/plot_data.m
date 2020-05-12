@@ -1,4 +1,4 @@
-function plot_data(data,fs,sensors,activities,colors)
+function plot_data(data,fs,sensors,activities,fig_num)
 	% ==================== plot_data  ====================
 	% This funtion is responsible for ploting the data adquired from
 	% the sensors in all 3 axes with a given sampling frequency.The
@@ -13,20 +13,47 @@ function plot_data(data,fs,sensors,activities,colors)
 	%		acceleration
 	%		>>> sensors (string): labels that identify each
 	%		component (axis) of the sensor
-	%		>>> usr_stances (string): labels for the plot
+	%		>>> activities (cell array): labels for the plot
 	%		containg the multiple possible stances for a user
-	%		in any given moment
-	%		>>> colors (string): string array with the colors
-	%		for the plot commands	
+	%		in any given moment and the start and ending times
+	%		for any stance.
+	%		>>> number for the matlab figure where the plot
+	%		will apear
 	% =================================================
-	
+
 	time = (0:length(data)-1)./(60*fs); 
+	start_t = cell2mat(activities(:,2));
+	end_t = cell2mat(activities(:,3));
 	
-	figure(1); 
+	figure(fig_num)
 	for k = 1 : length(sensors)
 		subplot(length(sensors),1,k);
-		plot(time,data(:,k),colors(1,k));
+		axis([0, time(end) min(data(:,k)) max(data(:, k))])
+		plot(time,data(:,k),"k"); 
+		hold on;
+		for w = 1 : length(activities)
+			window = start_t(w) : end_t(w);
+			plot(time(window),data(window,k));
+			add_text(data(:,k),time,activities(w,1),start_t(w));
+			hold on;
+		end
 		xlabel("Time (min)");
 		ylabel(sensors(1,k));
+	
 	end
 end
+
+function add_text(data,time,label,index)
+	% helper function to position the anotation text in the correct
+	% spot in the plot
+	
+	min_value = min(data);
+	max_value = max(data);
+	if mod(index, 2) ~= 1
+                spot = min_value - (0.1 * min_value);
+	else
+                spot = max_value - (0.1 * min_value);
+	end
+	text(time(index),spot,label);
+end
+

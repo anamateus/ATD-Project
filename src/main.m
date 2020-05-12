@@ -6,9 +6,6 @@ dirpath = "../DataSet";
 % User stances throughout the study  (labels for the plot)
 activities = ["W", "W\_U", "W\_D","SIT", "STAND","LAY", "STAND\_SIT", "SIT\_STAND", "SIT\_LIE", "LIE\_SIT", "STAND\_LIE", "LIE\_STAND"];
 
-% Colors ( To be used when plotting)
-colors = ["r", "b", "g", "w", "k", "y","m", "c"];
-
 % Accelerometers (Sensors available to get the data in the X Y and Z axis)
 sensors = ["ACC\_X","ACC\_Y","ACC\_Z"];
 
@@ -20,7 +17,12 @@ fs = 50;
 [exp,usr] = load_data(dirpath);
 get_labels(labels,activities,exp,usr);
 
-plot_data(exp11_user06,fs,sensors,activities,colors);
+%% Plot all figures (Sorry for the spam...)
+for i = 1 : length(exp)
+	data = sprintf("exp%d_user%.2d",exp(i),usr(i));
+	data_label = sprintf("exp%d_user%.2d_label",exp(i),usr(i));
+	plot_data(eval(data),fs,sensors,eval(data_label),i);
+end
 
 
 

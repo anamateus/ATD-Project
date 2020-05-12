@@ -4,10 +4,10 @@ function get_labels(labels,activities,experiments,users)
 	% labels.txt file and returns a cell array with 3 columns. The first
 	% column is a string that identifies the activity that the user was
 	% doing at a given moment in time. The second column contains the
-	% start time of each activity in the dataset ( keeping in mind
-	% that those times are associated with the samples that were 
-	% obtained with a sampling frequency of 50Hz). The last column
-	% contains the activities ending time.
+	% start time of each activity in the dataset.The last column
+	% contains the activities ending time. Both times are counted in
+	% log samples -> index of the row of the matrix that contains the
+	% wanted sample
 	% This cell array will be useful to identify each activity in the
 	% correspondent dataset. The function loads the cell array to the
 	% workspace with the same name of the entry file with an extra
@@ -27,7 +27,7 @@ function get_labels(labels,activities,experiments,users)
 	% =================================================
 
 	k = 1;
-	format = "exp%.2d_usr%.2d_label";
+	format = "exp%.2d_user%.2d_label";
 	for  exp = experiments(2:2:end)
 		usr_exp_1 = find(labels(:,1) == (exp - 1))';
 		usr_exp_2 = find( labels(:,1) == exp)';
