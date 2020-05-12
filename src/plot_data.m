@@ -34,7 +34,7 @@ function plot_data(data,fs,sensors,activities,fig_num)
 		for w = 1 : length(activities)
 			window = start_t(w) : end_t(w);
 			plot(time(window),data(window,k));
-			add_text(data(:,k),time,activities(w,1),start_t(w));
+			add_text(data(:,k),time,activities(w,1),start_t(w),w);
 			hold on;
 		end
 		xlabel("Time (min)");
@@ -43,17 +43,17 @@ function plot_data(data,fs,sensors,activities,fig_num)
 	end
 end
 
-function add_text(data,time,label,index)
+function add_text(data,time,label,pos,index)
 	% helper function to position the anotation text in the correct
 	% spot in the plot
 	
 	min_value = min(data);
 	max_value = max(data);
-	if mod(index, 2) ~= 1
-                spot = min_value - (0.1 * min_value);
-	else
-                spot = max_value - (0.1 * min_value);
+	if mod(index, 2) ~= 0
+        spot = min_value - (0.1 * min_value);
+    else
+        spot = max_value - (0.1 * min_value);
 	end
-	text(time(index),spot,label);
+	text(time(pos),spot,label);
 end
 

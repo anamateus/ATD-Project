@@ -18,7 +18,7 @@ fs = 50;
 get_labels(labels,activities,exp,usr);
 
 %% Plot all figures (Sorry for the spam...)
-for i = 1 : length(exp)
+for i = 1 : length(1)
 	data = sprintf("exp%d_user%.2d",exp(i),usr(i));
 	data_label = sprintf("exp%d_user%.2d_label",exp(i),usr(i));
 	plot_data(eval(data),fs,sensors,eval(data_label),i);
