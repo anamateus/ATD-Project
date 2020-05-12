@@ -27,7 +27,7 @@ function get_labels(labels,activities,experiments,users)
 	% =================================================
 
 	k = 1;
-	format = "exp%d_usr%d_label";
+	format = "exp%.2d_usr%.2d_label";
 	for  exp = experiments(2:2:end)
 		usr_exp_1 = find(labels(:,1) == (exp - 1))';
 		usr_exp_2 = find( labels(:,1) == exp)';
