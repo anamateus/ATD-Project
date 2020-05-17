@@ -40,5 +40,6 @@ std(table)
 
 %%
 h = hamming(round(2*fs));
-STFT("exp11_user06",fs,13,sensors,h,1,2);
-
+STFT("exp11_user06",fs,"all",sensors,h,1,2);
+%%
+signal_power("exp11_user06",1:20,sensors,true);
