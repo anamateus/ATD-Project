@@ -4,7 +4,7 @@ dirpath = "../DataSet";
 
 %% Global Variables
 % User stances throughout the study  (labels for the plot)
-activities = ["W", "W\_U", "W\_D","SIT", "STAND","LAY", "STAND\_SIT", "SIT\_STAND", "SIT\_LIE", "LIE\_SIT", "STAND\_LIE", "LIE\_STAND"];
+activities = ["W", "W\_U", "W\_D","SIT", "STAND","LAY", "STAND\_SIT", "SIT\_STAND", "SIT\_LAY", "LAY\_SIT", "STAND\_LAY", "LAY\_STAND"];
 
 % Accelerometers (Sensors available to get the data in the X Y and Z axis)
 sensors = ["ACC\_X","ACC\_Y","ACC\_Z"];
@@ -23,7 +23,6 @@ for i = 1 : length(1)
 	data_label = sprintf("exp%d_user%.2d_label",exp(i),usr(i));
 	plot_data(eval(data),fs,sensors,eval(data_label),i);
 end
-
-
-
-
+%%
+h = hamming(round(2*fs));
+STFT("exp11_user06",fs,13,sensors,h,1,2);
