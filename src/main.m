@@ -23,6 +23,22 @@ for i = 1 : length(1)
 	data_label = sprintf("exp%d_user%.2d_label",exp(i),usr(i));
 	plot_data(eval(data),fs,sensors,eval(data_label),i);
 end
+
+%% Add DFT calculation
+%% Steps calculation for exp11_user06
+acts = string(exp11_user06_label(:,1));
+acts_index = find(acts == "W" | acts == "W\_D" | acts == "W\_U");
+table = zeros(1,length(acts_index))';
+j = 1;
+for i = acts_index'
+    table(j) = get_steps("exp11_user06",fs,i);
+    j = j + 1;
+end
+["Activities Index","Steps Per Minute";acts_index,table]
+mean(table)
+std(table)
+
 %%
 h = hamming(round(2*fs));
 STFT("exp11_user06",fs,13,sensors,h,1,2);
+

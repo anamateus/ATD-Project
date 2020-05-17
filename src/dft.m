@@ -28,7 +28,7 @@ function  dft_coefs = dft(exp_usr_name,fs,sensors,acts)
     % DFT calculation
     for i = 1:n_activities
         for j = 1:3
-            dft_centered = fftshift(fft(data(times(i,1):times(i,2),j)));
+            dft_centered = fftshift(fft(detrend(data(times(i,1):times(i,2),j))));
             dft_coefs{i,1,j} = {dft_centered};
         end 
     end
@@ -48,7 +48,7 @@ function  dft_coefs = dft(exp_usr_name,fs,sensors,acts)
             end
             % Linear Frequency Domain
             freq = n * fo;
-            % Truly Plotting
+            % True Plotting
             for j = 1:3
                 subplot(3,n_activities,frame_counter + n_activities*(j-1));
                 plot(freq,abs(cell2mat(dft_coefs{i,1,j})));
