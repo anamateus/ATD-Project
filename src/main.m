@@ -43,3 +43,6 @@ h = hamming(round(2*fs));
 STFT("exp11_user06",fs,"all",sensors,h,1,2);
 %%
 signal_power("exp11_user06",1:20,sensors,true);
+
+%%
+magnitude_vector("exp11_user06", fs, true);

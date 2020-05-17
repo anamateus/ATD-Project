@@ -1,5 +1,5 @@
 function P = signal_power(signal, activities, sensors,helper_plot) 
-	    x =evalin("base", signal);
+	    x = evalin("base", signal);
 	    labels = evalin("base", sprintf("%s_label", signal));
 	    P = zeros(length(activities), length(sensors));
    
