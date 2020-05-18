@@ -60,6 +60,23 @@ magnitude_vector("exp11_user06", fs, true);
 
 %% Angle Experiments Zone
 posture_orientation("exp11_user06", fs, true);
+
+%% Dynamic activities Experiments Zone
+exps = ["exp11_user06", "exp12_user06", "exp13_user07", "exp14_user07", "exp15_user08", "exp16_user08", "exp17_user09", "exp18_user09", "exp19_user10"];
+for k = exps
+    dft_max_3d_dynamic(k);
+    hold on;
+end
+
+%% All activities Experiments Zone
+exps = ["exp11_user06", "exp12_user06", "exp13_user07", "exp14_user07", "exp15_user08", "exp16_user08", "exp17_user09", "exp18_user09", "exp19_user10"];
+for k = exps
+    dft_max_3d_plot(k, fs);
+    hold on;
+end
+hold on
+[x,y] = meshgrid(0:0.1:10);surf(x,0.5+0*y+0*x,y);surf(x,y,0*x+0*y + 0.5);surf(0.5+0*y+0*x,x,y);
+
 %% Matlab stft helper function
 
 function matlab_stft_plot(signal,fs,window,overlap_len,dft_len)
@@ -69,3 +86,5 @@ function matlab_stft_plot(signal,fs,window,overlap_len,dft_len)
 		stft(signal(:,i),fs,'Window',window,'OverlapLength',round(overlap_len*fs),'FFTLength',round(dft_len*fs));	
 	end
 end
+
+

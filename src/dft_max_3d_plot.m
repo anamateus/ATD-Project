@@ -41,8 +41,8 @@ function dft_max_3d_plot(exp_usr_name,fs)
     stand_index = find(labels == "STAND");
     % Plotting
     titles = ["Magnitude","Frequency"];
-    for i = 1:2
-        figure();
+    for i = 2
+        %figure();
         plot3(table(walk_index,1,i),table(walk_index,2,i),table(walk_index,3,i),"bo",'DisplayName',"WALK");
         hold on
         plot3(table(walku_index,1,i),table(walku_index,2,i),table(walku_index,3,i),"ro",'DisplayName',"WALK_U_P");
@@ -51,17 +51,19 @@ function dft_max_3d_plot(exp_usr_name,fs)
         plot3(table(sit_index,1,i),table(sit_index,2,i),table(sit_index,3,i),"rx",'DisplayName',"SIT");
         plot3(table(lay_index,1,i),table(lay_index,2,i),table(lay_index,3,i),"gx",'DisplayName',"LAY");
         % Title
-        title(titles(i)+' of max(DFT) ['+exp_usr_name+']','Interpreter',"none")
+        title(titles(i)+'of max(DFT)')
         % Max DFT values in the signal:
         xlabel('ACC_X')
         ylabel('ACC_Y')
         zlabel('ACC_Z')
+        %{
         switch i
             case 1
                 
             case 2
                 [x,y] = meshgrid(0:0.1:10);surf(x,0.5+0*y+0*x,y);surf(x,y,0*x+0*y + 0.5);surf(0.5+0*y+0*x,x,y);
         end
+        %}
         legend show;
     end
 end
