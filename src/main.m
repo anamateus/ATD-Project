@@ -59,7 +59,7 @@ signal_power("exp11_user06",1:20,sensors,true);
 magnitude_vector("exp11_user06", fs, true);
 
 %% Angle Experiments Zone
-angle("exp11_user06", fs, true);
+posture_orientation("exp11_user06", fs, true);
 %% Matlab stft helper function
 
 function matlab_stft_plot(signal,fs,window,overlap_len,dft_len)
