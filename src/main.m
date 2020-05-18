@@ -42,15 +42,14 @@ end
 ["Activities Index","Steps Per Minute";acts_index,table]
 mean(table)
 std(table)
-
-%%
+%% STFT Experiments Zone
 h = hamming(round(2*fs));
 STFT("exp11_user06",fs,"all",sensors,h,1,2);
-%%
+%% Signal Power Experiments Zone
 signal_power("exp11_user06",1:20,sensors,true);
 
-%%
+%% SMV Experiments Zone
 magnitude_vector("exp11_user06", fs, true);
 
-%%
+%% Angle Experiments Zone
 angle("exp11_user06", fs, true);
