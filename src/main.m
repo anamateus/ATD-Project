@@ -43,8 +43,14 @@ end
 mean(table)
 std(table)
 %% STFT Experiments Zone
+s = detrend(eval("exp11_user06"));
+STFT("exp11_user06",fs,"all",sensors,"rectwin",0.05,0.5);
+matlab_stft_plot(s,fs,rectwin(round(0.5*fs)),0.05,0.5);
+STFT("exp11_user06",fs,"all",sensors,"hamming",1,2);
+matlab_stft_plot(s,fs,hamming(round(2*fs)),1,2);
 STFT("exp11_user06",fs,"all",sensors,"hamming",0.05,0.5);
-%% Signal Power Experiments Zone
+matlab_stft_plot(s,fs,hamming(round(0.5*fs)),0.05,0.5);
+%% Signal Power Experiments Zoneh = hamming(round(2*fs));
 signal_power("exp11_user06",1:20,sensors,true);
 
 %% SMV Experiments Zone
@@ -52,3 +58,12 @@ magnitude_vector("exp11_user06", fs, true);
 
 %% Angle Experiments Zone
 angle("exp11_user06", fs, true);
+%% Matlab stft helper function
+
+function matlab_stft_plot(signal,fs,window,overlap_len,dft_len)
+	figure();
+	for i = 1 : size(signal,2)
+		subplot(3,1,i);
+		stft(signal(:,i),fs,'Window',window,'OverlapLength',round(overlap_len*fs),'FFTLength',round(dft_len*fs));	
+	end
+end
