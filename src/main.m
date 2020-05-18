@@ -51,3 +51,6 @@ signal_power("exp11_user06",1:20,sensors,true);
 
 %%
 magnitude_vector("exp11_user06", fs, true);
+
+%%
+angle("exp11_user06", fs, true);
