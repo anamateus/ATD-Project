@@ -43,8 +43,7 @@ end
 mean(table)
 std(table)
 %% STFT Experiments Zone
-h = hamming(round(2*fs));
-STFT("exp11_user06",fs,"all",sensors,"hamming",0.02,0.05);
+STFT("exp11_user06",fs,"all",sensors,"hamming",0.05,0.5);
 %% Signal Power Experiments Zone
 signal_power("exp11_user06",1:20,sensors,true);
 
