@@ -46,8 +46,10 @@ std(table)
 s = detrend(eval("exp11_user06"));
 STFT("exp11_user06",fs,"all",sensors,"rectwin",0.05,0.5);
 matlab_stft_plot(s,fs,rectwin(round(0.5*fs)),0.05,0.5);
+
 STFT("exp11_user06",fs,"all",sensors,"hamming",1,2);
 matlab_stft_plot(s,fs,hamming(round(2*fs)),1,2);
+
 STFT("exp11_user06",fs,"all",sensors,"hamming",0.05,0.5);
 matlab_stft_plot(s,fs,hamming(round(0.5*fs)),0.05,0.5);
 %% Signal Power Experiments Zoneh = hamming(round(2*fs));
