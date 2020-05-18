@@ -25,6 +25,11 @@ for i = 1 : length(1)
 end
 
 %% Add DFT calculation
+dft("exp11_user06",fs,sensors,[3,13]);
+dft("exp11_user06",fs,sensors,[3,13],"hamming");
+dft("exp11_user06",fs,sensors,[3,13],"gausswin");
+dft("exp11_user06",fs,sensors,[3,13],"blackman");
+
 %% Steps calculation for exp11_user06
 acts = string(exp11_user06_label(:,1));
 acts_index = find(acts == "W" | acts == "W\_D" | acts == "W\_U");

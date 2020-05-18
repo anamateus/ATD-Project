@@ -1,5 +1,5 @@
 function SMV = magnitude_vector(signal, fs, helper_plot) 
-        g = 9.80665;
+            g = 9.80665;
 	    x = evalin("base", signal).*g;
 	    labels = evalin("base", sprintf("%s_label", signal));
 	    SMV = zeros(length(signal), 1);
@@ -11,12 +11,11 @@ function SMV = magnitude_vector(signal, fs, helper_plot)
             SMV(i) = sqrt(a + b + c);
         end
         
-       
         if helper_plot == true
             time = (0:length(x)-1)./(60*fs); 
             
             
-		    figure();
+	    figure();
             plot(time, SMV, "k");
             hold on;
             for i = 1 : length(labels)

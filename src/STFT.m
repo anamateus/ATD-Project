@@ -11,7 +11,7 @@ function S = STFT(x,fs,activities,sensors,window,overlap_len,dft_len)
 			labels = evalin("base",sprintf("%s_label",x));
 			flag = 1;
 		end
-
+		
 		for act = activities
 			if flag == 1
 				a = cell2mat(labels(act,2));
@@ -25,6 +25,9 @@ function S = STFT(x,fs,activities,sensors,window,overlap_len,dft_len)
 			n_frame_samples = round(dft_len*fs);
 			n_frame_overlaps = round(overlap_len*fs);
 			freq_frame = linfreq_resolution(fs,n_frame_samples);
+
+		        aux =  eval("@"+ window);
+		        window = aux(n_frame_samples);
 
 			nwindows =  1 : n_frame_samples - n_frame_overlaps : n_pts - n_frame_samples;
 			S = zeros(length(nwindows),size(signal,2));
