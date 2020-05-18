@@ -13,7 +13,7 @@ function P = signal_power(signal, activities, sensors,helper_plot)
 	    
 	    if helper_plot == true
 		    figure();
-		    x_labels = string(labels(activities,1))';
+		   st;
 		    for s = 1 : length(sensors)
 			subplot(4,1,s)
 

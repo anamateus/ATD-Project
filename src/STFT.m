@@ -1,5 +1,4 @@
 function S = STFT(x,fs,activities,sensors,window,overlap_len,dft_len)
-
 		X = evalin("base",x);
 		flag = 0;
 		if strcmp(activities,"all") ~= 0
@@ -7,8 +6,10 @@ function S = STFT(x,fs,activities,sensors,window,overlap_len,dft_len)
 			b = length(X);
 			activities = 1;
 			labels = "all";
+			tlabel = "time [min]";	
 		else
 			labels = evalin("base",sprintf("%s_label",x));
+			tlabel = "time [s]";
 			flag = 1;
 		end
 		
@@ -21,13 +22,16 @@ function S = STFT(x,fs,activities,sensors,window,overlap_len,dft_len)
 			
 			n_pts = length(signal);
 			time = linspace(0,(n_pts - 1)/fs,n_pts);
-
+			if flag == 0
+				time = time./60;
+			end
+		
 			n_frame_samples = round(dft_len*fs);
 			n_frame_overlaps = round(overlap_len*fs);
 			freq_frame = linfreq_resolution(fs,n_frame_samples);
 
 		        aux =  eval("@"+ window);
-		        window = aux(n_frame_samples);
+		        win = aux(n_frame_samples);
 
 			nwindows =  1 : n_frame_samples - n_frame_overlaps : n_pts - n_frame_samples;
 			S = zeros(length(nwindows),size(signal,2));
@@ -35,7 +39,7 @@ function S = STFT(x,fs,activities,sensors,window,overlap_len,dft_len)
 			for acc = 1 : size(signal,2)
 				i = 1;
 				for k = nwindows
-					frame = signal(k : k + n_frame_samples - 1,acc).*window;
+					frame = signal(k : k + n_frame_samples - 1,acc).*win;
 					frame_dft = abs(fftshift( fft(frame) ));
 					index =  find(frame_dft == max(frame_dft),1,"last");
 					S(i,acc) = freq_frame(index);
@@ -51,7 +55,7 @@ function S = STFT(x,fs,activities,sensors,window,overlap_len,dft_len)
 			for acc = 1 : size(S,2)
 				subplot(3,1,acc)
 				plot(time_frames,S(:,acc), "ro");
-				xlabel("time [s]");
+				xlabel(tlabel);
 				ylabel(sprintf("%s\n Frequency [Hz]",sensors(acc) ));
 				grid on;	
 			end
