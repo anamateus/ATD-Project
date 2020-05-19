@@ -1,4 +1,4 @@
-function P = signal_power(signal, activities, sensors,helper_plot) 
+function P = signal_power(signal, activities, sensors, domain,helper_plot) 
 	    x = evalin("base", signal);
 	    labels = evalin("base", sprintf("%s_label", signal));
 	    P = zeros(length(activities), length(sensors));
@@ -7,7 +7,11 @@ function P = signal_power(signal, activities, sensors,helper_plot)
 		start = cell2mat(labels(act, 2));
 		finish = cell2mat(labels(act, 3));
 		for sensor = 1 : length(sensors)
-		    P(act, sensor) = double(sum(abs(x(start:finish, sensor).^2)) / (finish-start));
+            if domain == "frequency"
+    		    P(act, sensor) = double(sum(abs(fftshift(fft(x(start:finish, sensor))).^2)) / (finish-start));
+            elseif domain == "time"
+                P(act, sensor) = double(sum(abs(x(start:finish, sensor).^2)) / (finish-start));
+            end
 		end
 	    end
 	    

@@ -53,7 +53,7 @@ matlab_stft_plot(s,fs,hamming(round(2*fs)),1,2);
 STFT("exp11_user06",fs,"all",sensors,"hamming",0.05,0.5);
 matlab_stft_plot(s,fs,hamming(round(0.5*fs)),0.05,0.5);
 %% Signal Power Experiments Zoneh = hamming(round(2*fs));
-signal_power("exp11_user06",1:20,sensors,true);
+signal_power("exp11_user06",1:20,sensors,"time",true);
 
 %% SMV Experiments Zone
 magnitude_vector("exp11_user06", fs, true);
@@ -61,16 +61,58 @@ magnitude_vector("exp11_user06", fs, true);
 %% Angle Experiments Zone
 posture_orientation("exp11_user06", fs, true);
 
-%% All activities Experiments Zone
+%% All Experiences - max(DFT) 3d plot  ======> 4.3
+% Dynamic VS (Transition & Static)
 exps = ["exp11_user06", "exp12_user06", "exp13_user07", "exp14_user07", "exp15_user08", "exp16_user08", "exp17_user09", "exp18_user09", "exp19_user10","exp20_user10"];
 figure();
 for k = exps
     dft_max_3d_plot(k, fs,"true","Magnitude");
     hold on;
 end
-hold on
-
-
+[x,y,z] = sphere;
+surf(22*x,25*y,25*z);
+ax = gca;
+ax.XLim(1) = 0;
+ax.YLim(1) = 0;
+ax.ZLim(1) = 0;
+%% All Experiences (Transition/Static activities) - signal_power(DFT(activity)) 3d plot ======> 4.4
+% Transition VS Static
+exps = ["exp11_user06", "exp12_user06", "exp13_user07", "exp14_user07", "exp15_user08", "exp16_user08", "exp17_user09", "exp18_user09", "exp19_user10","exp20_user10"];
+figure();
+for k = exps
+    power_3d_plot(k,"frequency",["false","true","true"]);
+    hold on;
+end
+title("Transition VS Static - Power of DFT plot - All Experiences")
+[x,y,z] = sphere;
+surf(300*x,200*y,200*z);
+ax = gca;
+ax.XLim(1) = 0;
+ax.YLim(1) = 0;
+ax.ZLim(1) = 0;
+%% All Experiences (Dynamic activities) - signal_power(DFT(activity)) 3d plot ======> 4.5
+% WALK VS (WALK_DOWN & WALK_UP)
+exps = ["exp11_user06", "exp12_user06", "exp13_user07", "exp14_user07", "exp15_user08", "exp16_user08", "exp17_user09", "exp18_user09", "exp19_user10","exp20_user10"];
+figure();
+for k = exps
+    power_3d_plot(k,"frequency",["true","false","false"]);
+    hold on;
+end
+title(" Dynamic Activities - Power of DFT plot - All Experiences")
+[x,y] = meshgrid(0:20:200);
+surf(200 + 0*x,y,x);
+surf(800 + 0*x,y,x);
+%% All Experiences (Dynamic activities) - signal_power(activity) 3d plot ======> 4.5
+% WALK_DOWN VS WALK_UP
+exps = ["exp11_user06", "exp12_user06", "exp13_user07", "exp14_user07", "exp15_user08", "exp16_user08", "exp17_user09", "exp18_user09", "exp19_user10","exp20_user10"];
+figure();
+for k = exps
+    power_3d_plot(k,"time",["true","false","false"]);
+    hold on;
+end
+title(" Dynamic Activities - Power of activity plot - All Experiences")
+[x,y] = meshgrid(-0.5:0.1:1.15);
+surf(1.5-x,y,x-0.36)
 %% Matlab stft helper function
 
 function matlab_stft_plot(signal,fs,window,overlap_len,dft_len)
